@@ -1,0 +1,125 @@
+pict@pict-OptiPlex-5070:~$ start-all.sh
+starting org.apache.spark.deploy.master.Master, logging to /home/pict/Documents/spark/spark-3.4.0-bin-hadoop3/logs/spark-pict-org.apache.spark.deploy.master.Master-1-pict-OptiPlex-5070.out
+localhost: starting org.apache.spark.deploy.worker.Worker, logging to /home/pict/Documents/spark/spark-3.4.0-bin-hadoop3/logs/spark-pict-org.apache.spark.deploy.worker.Worker-1-pict-OptiPlex-5070.out
+stapict@pict-OptiPlex-5070:~$ start-dfs.sh
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [pict-OptiPlex-5070]
+pict@pict-OptiPlex-5070:~$ start-yarn.sh
+Starting resourcemanager
+Starting nodemanagers
+jpict@pict-OptiPlex-5070:~$ jps
+21088 NodeManager
+19858 Worker
+19666 Master
+20308 DataNode
+20535 SecondaryNameNode
+20121 NameNode
+20745 ResourceManager
+21274 Jps
+pict@pict-OptiPlex-5070:~$ 
+pict@pict-OptiPlex-5070:~$ 
+pict@pict-OptiPlex-5070:~$ 
+pict@pict-OptiPlex-5070:~$ 
+pict@pict-OptiPlex-5070:~$ hdfs dfs -mkdir /suya_pict
+pict@pict-OptiPlex-5070:~$ hdfs dfs -put /home/pict/suya.txt /suya_pict/
+pict@pict-OptiPlex-5070:~$ hdfs dfs -ls /suya_pict/
+Found 1 items
+-rw-r--r--   3 pict supergroup         56 2023-05-19 13:19 /suya_pict/suya.txt
+pict@pict-OptiPlex-5070:~$ hdfs dfs -cat /suya_pict/suya.txt
+this is haddop file for hadoop implementation by suyoig
+pict@pict-OptiPlex-5070:~$ yarn jar /home/pict/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.3.jar wordcount /suya_pict/suya.txt /suya_output/
+2023-05-19 13:23:09,491 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+2023-05-19 13:23:09,727 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/pict/.staging/job_1684482502762_0001
+2023-05-19 13:23:09,868 INFO input.FileInputFormat: Total input files to process : 1
+2023-05-19 13:23:10,777 INFO mapreduce.JobSubmitter: number of splits:1
+2023-05-19 13:23:10,867 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1684482502762_0001
+2023-05-19 13:23:10,868 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2023-05-19 13:23:10,957 INFO conf.Configuration: resource-types.xml not found
+2023-05-19 13:23:10,957 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2023-05-19 13:23:11,080 INFO impl.YarnClientImpl: Submitted application application_1684482502762_0001
+2023-05-19 13:23:11,106 INFO mapreduce.Job: The url to track the job: http://pict-OptiPlex-5070:8088/proxy/application_1684482502762_0001/
+2023-05-19 13:23:11,106 INFO mapreduce.Job: Running job: job_1684482502762_0001
+2023-05-19 13:23:15,150 INFO mapreduce.Job: Job job_1684482502762_0001 running in uber mode : false
+2023-05-19 13:23:15,152 INFO mapreduce.Job:  map 0% reduce 0%
+2023-05-19 13:23:19,201 INFO mapreduce.Job:  map 100% reduce 0%
+2023-05-19 13:23:23,234 INFO mapreduce.Job:  map 100% reduce 100%
+2023-05-19 13:23:23,252 INFO mapreduce.Job: Job job_1684482502762_0001 completed successfully
+2023-05-19 13:23:23,295 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=116
+		FILE: Number of bytes written=473847
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=161
+		HDFS: Number of bytes written=74
+		HDFS: Number of read operations=8
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=1141
+		Total time spent by all reduces in occupied slots (ms)=1252
+		Total time spent by all map tasks (ms)=1141
+		Total time spent by all reduce tasks (ms)=1252
+		Total vcore-milliseconds taken by all map tasks=1141
+		Total vcore-milliseconds taken by all reduce tasks=1252
+		Total megabyte-milliseconds taken by all map tasks=1168384
+		Total megabyte-milliseconds taken by all reduce tasks=1282048
+	Map-Reduce Framework
+		Map input records=1
+		Map output records=9
+		Map output bytes=92
+		Map output materialized bytes=116
+		Input split bytes=105
+		Combine input records=9
+		Combine output records=9
+		Reduce input groups=9
+		Reduce shuffle bytes=116
+		Reduce input records=9
+		Reduce output records=9
+		Spilled Records=18
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=48
+		CPU time spent (ms)=600
+		Physical memory (bytes) snapshot=502738944
+		Virtual memory (bytes) snapshot=5150875648
+		Total committed heap usage (bytes)=517996544
+		Peak Map Physical memory (bytes)=303206400
+		Peak Map Virtual memory (bytes)=2572587008
+		Peak Reduce Physical memory (bytes)=199532544
+		Peak Reduce Virtual memory (bytes)=2578288640
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=56
+	File Output Format Counters 
+		Bytes Written=74
+pict@pict-OptiPlex-5070:~$ hdfs dfs -ls /suya_output/
+Found 2 items
+-rw-r--r--   3 pict supergroup          0 2023-05-19 13:23 /suya_output/_SUCCESS
+-rw-r--r--   3 pict supergroup         74 2023-05-19 13:23 /suya_output/part-r-00000
+pict@pict-OptiPlex-5070:~$ hdfs dfs -cat /suya_output/part-r-00000
+by	1
+file	1
+for	1
+haddop	1
+hadoop	1
+implementation	1
+is	1
+suyoig	1
+this	1
+pict@pict-OptiPlex-5070:~$ 
+
+
